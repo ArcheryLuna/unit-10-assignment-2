@@ -42,6 +42,8 @@ SHEETS: Dict[str, str] = {
 PLOT_DIR: pathlib.Path = pathlib.Path("plots")
 PLOT_DIR.mkdir(exist_ok=True)
 
+OUTPUTS_DIR: pathlib.Path = pathlib.Path("outputs")
+OUTPUTS_DIR.mkdir(exist_ok=True)
 # ---------------------------------------------------------------------------
 # 1.  DATA INGESTION & CLEANING
 # ---------------------------------------------------------------------------
@@ -149,7 +151,7 @@ ordered_cols = [
 ]
 desc = desc[ordered_cols]
 
-desc.to_csv("summary_stats.csv", index_label="Measure")
+desc.to_csv("./outputs/summary_stats.csv", index_label="Measure")
 
 # ---------------------------------------------------------------------------
 # 4.  LOCAL AUTHORITIES ABOVE / BELOW NATIONAL MEAN
@@ -159,8 +161,10 @@ a_mean = desc.loc["T_5AC", "mean"]
 above_mean = df_merged[df_merged["T_5AC"] > a_mean][["LA_name", "T_5AC"]]
 below_mean = df_merged[df_merged["T_5AC"] < a_mean][["LA_name", "T_5AC"]]
 
-above_mean.to_csv("la_above_below_mean.csv", index=False, mode="w")
-below_mean.to_csv("la_above_below_mean.csv", index=False, mode="a", header=False)
+above_mean.to_csv("./outputs/la_above_below_mean.csv", index=False, mode="w")
+below_mean.to_csv(
+    "./outputs/la_above_below_mean.csv", index=False, mode="a", header=False
+)
 
 # ---------------------------------------------------------------------------
 # 5.  PAIRED t‑TEST
@@ -169,7 +173,7 @@ below_mean.to_csv("la_above_below_mean.csv", index=False, mode="a", header=False
 t_stat, p_val = stats.ttest_rel(
     df_merged["M_5AC"], df_merged["F_5AC"], nan_policy="omit"
 )
-with open("male_female_ttest.txt", "w") as fh:
+with open("./outputs/male_female_ttest.txt", "w") as fh:
     fh.write(
         "Paired t‑test – Boys vs Girls (% 5+ A*-C)\n"
         f"t-statistic = {t_stat:.3f}\n"
