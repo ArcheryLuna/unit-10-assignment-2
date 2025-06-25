@@ -13,7 +13,7 @@ set -eu
 # -------- SETTINGS -----------------------------------------------------------
 VENV_DIR="venv"        # folder name for the virtual environment
 REQUIRED_PY="3.9"      # minimum Python version
-PACKAGES="pandas numpy scipy matplotlib"  # space‑separated list
+PACKAGES="pandas numpy scipy matplotlib seaborn"  # space‑separated list
 
 # -------- HELPER: compare versions ------------------------------------------
 ver_ge() {

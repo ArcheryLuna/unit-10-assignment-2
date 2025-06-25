@@ -13,7 +13,7 @@ setlocal enabledelayedexpansion
 
 REM -------- SETTINGS ---------------------------------------------------------
 set "VENV_DIR=venv"
-set "PACKAGES=pandas numpy scipy matplotlib"
+set "PACKAGES=pandas numpy scipy matplotlib seaborn"
 
 REM -------- 1. Locate Python 3 ------------------------------------------------
 where py  >nul 2>&1
